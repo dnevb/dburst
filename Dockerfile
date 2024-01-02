@@ -14,23 +14,31 @@ run corepack enable
 
 WORKDIR /app
 
-COPY ui .
-COPY --from=proto /uipb/ src/pb
+COPY ui/package.json ui/pnpm-lock.yaml ./
 
 RUN pnpm i
 
+COPY ui .
+COPY --from=proto /uipb/ src/pb
+
 RUN pnpm build
 
-FROM golang:alpine
+FROM golang:alpine as builder
 
 WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
 
 COPY . .
 
 COPY --from=frontend /app/build ui/build
 COPY --from=proto /pb .
 
-RUN go mod tidy
-RUN go build -o main . 
+RUN go build -o dburst . 
 
-ENTRYPOINT ["./main"]
+FROM alpine
+
+COPY --from=builder /app/dburst /usr/bin
+
+ENTRYPOINT ["dburst"]
