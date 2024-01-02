@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/dnevb/dburst/main/ui/static/logo-icon.svg" width='64px' height='64px' align="right"/>
+
 # DBURST
 
 Database tool for developers, SQL programmers, database administrators and analysts.
