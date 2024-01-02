@@ -41,4 +41,6 @@ FROM alpine
 
 COPY --from=builder /app/dburst /usr/bin
 
+ENV DB_PATH=/data
+
 ENTRYPOINT ["dburst"]

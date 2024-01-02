@@ -6,4 +6,9 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
   plugins: [unocss(), nodePolyfills(), sveltekit(), tsconfig()],
+  build: {
+    rollupOptions: {
+      external: ['knex'],
+    },
+  },
 });
