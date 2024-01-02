@@ -1,0 +1,25 @@
+syntax = "proto3";
+package dburst.worksheet.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Worksheet {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  string content = 5;
+  string parent = 9;
+  string connection = 10;
+  string database = 11;
+
+  map<string,string> variables = 7;
+  string created_by = 6;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message SheetVariable {
+  string slug = 1;
+  string type = 2;
+  string default_value = 3;
+  bool required = 4;
+}

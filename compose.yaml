@@ -1,0 +1,26 @@
+services:
+  rentaldb:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: main
+    ports:
+      - 5432:5432
+    volumes:
+      - rentaldb_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 5000:8080
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@mail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 5001:80
+volumes:
+  rentaldb_data:

@@ -1,0 +1,29 @@
+syntax = "proto3";
+package dburst.session.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message ConnectionCredentials {
+  string scheme = 1;
+  string host = 2;
+  int32 port = 3;
+  string username = 5;
+  string password = 6;
+  string database = 7;
+  map<string, string> options = 8;
+}
+
+message ConnectionInfo {
+  string id = 1;
+  string name = 2;
+  ConnectionCredentials credentials = 3;
+  string created_by = 4;
+}
+
+message SessionInfo {
+  string iss = 1;
+  string sub = 2;
+  string aud = 3;
+  google.protobuf.Timestamp iat = 4;
+  google.protobuf.Timestamp exp = 5;
+}

@@ -1,0 +1,62 @@
+syntax = "proto3";
+package dburst.session.v1;
+
+import "dburst/session/v1/types.proto";
+
+service SessionService {
+  rpc Signin(SigninRequest) returns (SigninResponse);
+  rpc CurrentSession(CurrentSessionRequest) returns (CurrentSessionResponse);
+  rpc CreateConnection(CreateConnectionRequest) returns (CreateConnectionResponse);
+  rpc UpdateConnection(UpdateConnectionRequest) returns (UpdateConnectionResponse);
+  rpc ListConnections(ListConnectionsRequest) returns (ListConnectionsResponse);
+  rpc GetConnection(GetConnectionRequest) returns (GetConnectionResponse);
+  rpc DeleteConnection(DeleteConnectionRequest) returns (DeleteConnectionResponse); 
+}
+
+message SigninRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message SigninResponse {
+  string token = 1;
+}
+
+message CurrentSessionRequest {}
+message CurrentSessionResponse {
+  SessionInfo session = 1;
+}
+
+message CreateConnectionRequest {
+  ConnectionCredentials credentials = 1;
+  string name = 2;
+}
+message CreateConnectionResponse {
+  string connection_id = 1;
+}
+
+message UpdateConnectionRequest {
+  string id = 1;
+  ConnectionCredentials credentials = 2;
+  string name = 3;
+}
+message UpdateConnectionResponse {
+  ConnectionInfo connection = 1;
+}
+
+message ListConnectionsRequest {}
+message ListConnectionsResponse {
+  repeated ConnectionInfo connections = 1;
+}
+
+message GetConnectionRequest {
+  string connection_id = 1;
+}
+message GetConnectionResponse {
+  ConnectionInfo connection = 1;
+}
+
+message DeleteConnectionRequest {
+  string connection_id = 1;
+}
+message DeleteConnectionResponse {}

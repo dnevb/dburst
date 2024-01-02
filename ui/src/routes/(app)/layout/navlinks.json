@@ -1,0 +1,22 @@
+[
+  {
+    "icon": "i-carbon:link",
+    "path": "/connections",
+    "title": "Connections"
+  },
+  {
+    "icon": "i-carbon:code",
+    "path": "/editor",
+    "title": "Editor"
+  },
+  {
+    "icon": "i-carbon:document",
+    "path": "/worksheets",
+    "title": "User Worksheets"
+  },
+  {
+    "icon": "i-carbon:db2-database",
+    "path": "/schemas",
+    "title": "Schemas"
+  }
+]

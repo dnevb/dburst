@@ -1,0 +1,51 @@
+syntax = "proto3";
+package dburst.sqlclient.v1;
+
+// query
+message QueryDetail {
+  string query_id = 1;
+  int32 row_count = 2;
+  int64 duration = 3;
+}
+
+// schemas
+message Schema {
+  string id = 1;
+  string name = 2;
+  string database_name = 3;
+}
+message Table {
+  string id = 1;
+  string name = 2;
+  string schema = 3;
+  string type = 4;
+  string comment = 5;
+
+  int64 data_size = 6;
+  int64 index_size = 7;
+  int64 total_size = 8;
+  int64 row_count = 9;
+}
+message Column {
+  string id = 1;
+  string name = 2;
+  string table_name = 3;
+  string data_type = 4;
+  string default_value = 5;
+  int32 max_length = 6;
+  int32 numeric_precision = 7;
+  int32 numeric_scale = 8;
+
+  bool is_nullable = 9;
+  bool is_unique = 10;
+  bool is_primary_key = 11;
+  bool is_generated = 12;
+  bool has_auto_increment = 13;
+
+  string foreign_key_table = 14;
+  string foreign_key_column = 15;
+
+  string comment = 16;
+
+  int32 ordinal_position = 17;
+}

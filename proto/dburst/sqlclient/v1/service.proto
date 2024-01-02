@@ -1,0 +1,66 @@
+syntax = "proto3";
+package dburst.sqlclient.v1;
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/empty.proto";
+
+import "dburst/sqlclient/v1/types.proto";
+
+service SqlClientService {
+  rpc Query(QueryRequest) returns (QueryResponse);
+  rpc GetTableInfo(GetTableInfoRequest) returns (GetTableInfoResponse);
+  rpc ListSchemas(ListSchemasRequest) returns (ListSchemasResponse);
+  rpc ListTables(ListTablesRequest) returns (ListTablesResponse);
+  rpc ListColumns (ListColumnsRequest) returns (ListColumnsResponse);
+  rpc Close(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+message QueryRequest { 
+  string sql = 1; 
+  string connection = 2;
+  string database = 3;
+}
+
+message QueryResponse {
+  repeated google.protobuf.ListValue rows = 1;
+  repeated Column columns = 2;
+  QueryDetail detail = 3;
+  string connection = 4;
+}
+
+message GetTableInfoRequest {
+  string connection = 1;
+  string database = 2;
+  string id = 3;
+}
+message GetTableInfoResponse {
+  Table table = 1;
+  repeated Column columns = 2;
+}
+
+message ListSchemasRequest {
+  string database = 1;
+  string connection = 2;
+}
+message ListSchemasResponse {
+  repeated Schema schemas = 1;
+}
+
+message ListTablesRequest {
+  string schema = 1;
+  string database = 2;
+  string connection = 3;
+}
+message ListTablesResponse {
+  repeated Table tables = 1;
+}
+
+message ListColumnsRequest {
+  string schema = 1;
+  string table = 2;
+  string database = 3;
+  string connection = 4;
+}
+message ListColumnsResponse {
+  repeated Column columns = 1;
+}

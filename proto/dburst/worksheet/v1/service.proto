@@ -1,0 +1,58 @@
+syntax = "proto3";
+package dburst.worksheet.v1;
+
+import "google/protobuf/struct.proto";
+
+import "dburst/worksheet/v1/worksheet.proto";
+import "dburst/sqlclient/v1/types.proto";
+
+service WorksheetService {
+  rpc CreateWorksheet(CreateWorksheetRequest) returns (CreateWorksheetResponse);
+  rpc ListWorksheet(ListWorksheetRequest) returns (ListWorksheetResponse);
+  rpc GetWorksheet(GetWorksheetRequest) returns (GetWorksheetResponse);
+  rpc UpdateWorksheet(UpdateWorksheetRequest) returns (UpdateWorksheetResponse);
+  rpc RunWorksheet(RunWorksheetRequest) returns (RunWorksheetResponse); 
+}
+
+message CreateWorksheetRequest {
+  string name = 1;
+  string type = 2;
+  string parent_id = 3;
+}
+message CreateWorksheetResponse {
+  string worksheet_id = 1;
+} 
+
+message ListWorksheetRequest {}
+message ListWorksheetResponse {
+  repeated Worksheet worksheets = 1;
+}
+
+message GetWorksheetRequest {
+  string worksheet_id = 1;
+}
+message GetWorksheetResponse {
+  Worksheet worksheet = 1;
+}
+
+message UpdateWorksheetRequest {
+  string id =1;
+  string name = 2;
+  string content = 3;
+  string parent = 4;
+  map<string,string> variables = 5;
+  string connection = 6;
+  string database = 7;
+}
+message UpdateWorksheetResponse {
+  Worksheet worksheet = 1;
+}
+
+message RunWorksheetRequest {
+  string worksheet_id = 1;
+}
+message RunWorksheetResponse {
+  repeated google.protobuf.ListValue rows = 1;
+  repeated sqlclient.v1.Column columns = 2;
+  string connection = 4;
+}
